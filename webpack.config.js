@@ -18,7 +18,7 @@ module.exports = {
     },
     output: {
         filename: 'overviewer-map-extensions.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: process.env.OVERVIEWER_MAP_PATH || path.resolve(__dirname, 'dist'),
     },
     plugins: [new HtmlWebpackPlugin({
         template: 'assets/index.html',
