@@ -1,5 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+
+const OUTPUT_PATH = process.env.OVERVIEWER_MAP_PATH || path.resolve(__dirname, 'dist');
 
 module.exports = {
     entry: './src/index.ts',
@@ -18,10 +21,20 @@ module.exports = {
     },
     output: {
         filename: 'overviewer-map-extensions.js',
-        path: process.env.OVERVIEWER_MAP_PATH || path.resolve(__dirname, 'dist'),
+        path: OUTPUT_PATH,
     },
-    plugins: [new HtmlWebpackPlugin({
-        template: 'assets/index.html',
-        minify: false,
-    })],
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'assets/index.html',
+            minify: false,
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'assets/overviewer-map-extensions-config.json',
+                    to: OUTPUT_PATH
+                }
+            ]
+        })
+    ],
 };

@@ -1,0 +1,18 @@
+{
+  "removeCompass": true,
+  "overlays": [
+    {
+      "world": "world",
+      "render": "overworld",
+      "overlayRender": "overworld-night",
+      "enableWhenWorldIsLoaded":  true,
+      "simulateDayNightCycle": true
+    },
+    {
+      "world": "world",
+      "render": "nether",
+      "overlayRender": "nether-roof",
+      "enableWhenWorldIsLoaded":  true
+    }
+  ]
+}
