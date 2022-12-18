@@ -1,5 +1,6 @@
 {
   "removeCompass": true,
+  "apiUrl": "https://localhost:8080",
   "overlays": [
     {
       "world": "world",

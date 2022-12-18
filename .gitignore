@@ -1,6 +1,2 @@
 .idea/
 *.iml
-node_modules/
-dist/
-
-overviewer-map-extensions-config.json
