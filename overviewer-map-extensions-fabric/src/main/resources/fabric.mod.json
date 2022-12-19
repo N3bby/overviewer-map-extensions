@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "overviewer-map-extensions-fabric",
+  "id": "overviewer-map-extensions",
   "version": "${version}",
-  "name": "overviewer-map-extensions-fabric",
+  "name": "overviewer-map-extensions",
   "description": "Adds websocket API that supports overviewer-map-extensions",
   "authors": [
     "N3bby"
@@ -19,7 +19,7 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "com.mod_author.mod_id.ModName"
+        "value": "com.razacx.overviewer-map-extensions.OverviewerMapExtensions"
       }
     ]
   },

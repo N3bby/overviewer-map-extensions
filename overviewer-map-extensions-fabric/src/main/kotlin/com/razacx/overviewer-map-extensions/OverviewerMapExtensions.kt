@@ -1,4 +1,4 @@
-package com.mod_author.mod_id
+package com.razacx.`overviewer-map-extensions`
 
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -10,7 +10,7 @@ import io.ktor.server.routing.*
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 
-object ModName : ModInitializer {
+object OverviewerMapExtensions : ModInitializer {
 
     private const val MOD_ID = "overviewer-map-extensions-fabric"
     val serverProvider = MinecraftServerProvider()
