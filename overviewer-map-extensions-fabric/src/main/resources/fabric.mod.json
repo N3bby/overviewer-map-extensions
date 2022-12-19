@@ -19,7 +19,7 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "com.razacx.overviewer-map-extensions.OverviewerMapExtensions"
+        "value": "com.razacx.overviewer_map_extensions.OverviewerMapExtensions"
       }
     ]
   },
