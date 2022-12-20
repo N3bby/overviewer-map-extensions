@@ -1,6 +1,6 @@
 {
+  "websocketUrl": "ws://localhost:8080/ws",
   "removeCompass": true,
-  "apiUrl": "https://localhost:8080",
   "overlays": [
     {
       "world": "world",
@@ -15,5 +15,13 @@
       "overlayRender": "nether-roof",
       "enableWhenWorldIsLoaded":  true
     }
-  ]
+  ],
+  "dynamicPlayers": {
+    "enabled": true,
+    "dimensionMapping": [
+      { "map": "world - overworld", "dimension": "minecraft:overworld"},
+      { "map": "world - nether", "dimension": "minecraft:nether"},
+      { "map": "world - end", "dimension": "minecraft:nether}"}
+    ]
+  }
 }

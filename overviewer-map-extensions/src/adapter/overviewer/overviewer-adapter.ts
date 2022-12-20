@@ -39,6 +39,14 @@ export class OverviewerAdapter {
         }
     }
 
+    setOverlayOpacity(overlayIdentifier: OverlayIdentifier, opacity: number) {
+        const overlay = this.overviewer.collections.overlays
+            [overlayIdentifier.getDimensionIdentifier()]
+            [overlayIdentifier.getOverlayIdentifier()];
+
+        overlay.setOpacity(opacity);
+    }
+
     removeCompass() {
         this.overviewer.compass.remove()
     }
