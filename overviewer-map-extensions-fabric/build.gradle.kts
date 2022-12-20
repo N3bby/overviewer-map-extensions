@@ -21,6 +21,13 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("io.ktor:ktor-server-websockets:$ktor_version")
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
+
+    include("io.ktor:ktor-server-core:$ktor_version")
+    include("io.ktor:ktor-server-netty:$ktor_version")
+    include("io.ktor:ktor-server-content-negotiation:$ktor_version")
+    include("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    include("io.ktor:ktor-server-websockets:$ktor_version")
+    include("io.reactivex.rxjava3:rxkotlin:3.0.1")
 }
 tasks {
     val javaVersion = JavaVersion.toVersion((project.extra["java_version"] as String).toInt())
