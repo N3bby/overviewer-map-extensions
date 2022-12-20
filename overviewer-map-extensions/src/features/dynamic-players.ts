@@ -1,9 +1,9 @@
 import {Config} from '../config';
 import {minecraftServerAdapter} from '../adapter/minecraft-server/minecraft-server-adapter';
-import type {MovingMarker, Marker, Icon, icon as createIcon} from 'leaflet';
-import {Player, PlayerMessage} from '../adapter/minecraft-server/messages/players-message';
-import {overviewer} from '../adapter/overviewer/overviewer-adapter';
+import type {Icon, icon as createIcon, Marker, MovingMarker} from 'leaflet';
 import {LatLng} from 'leaflet';
+import {Player} from '../adapter/minecraft-server/messages/players-message';
+import {overviewer} from '../adapter/overviewer/overviewer-adapter';
 
 export function dynamicPlayersFeature(config: Config) {
     if(!config.dynamicPlayers.enabled) return;
