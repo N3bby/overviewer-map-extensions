@@ -1,5 +1,5 @@
 import {DimensionIdentifier, OverlayIdentifier} from '../../identifiers';
-import {LatLng, Marker} from 'leaflet';
+import {LatLng, Marker, videoOverlay} from 'leaflet';
 
 export class OverviewerAdapter {
 
@@ -87,6 +87,11 @@ export class OverviewerAdapter {
 
     removeMarker(marker: Marker) {
         this.overviewer.map.removeLayer(marker);
+    }
+
+    panTo(position: {x: number, y: number, z: number}) {
+        const latNg = this.calculateLatNg(this.getCurrentDimension(), position)
+        this.overviewer.map.panTo(latNg)
     }
 }
 

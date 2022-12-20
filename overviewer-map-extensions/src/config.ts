@@ -22,6 +22,7 @@ export type ConfigJson = {
     playerList:{
         enabled: boolean,
         dimensionIcons: Record<string, string>
+        enableFollowPlayer: boolean
     }
 }
 
@@ -43,6 +44,7 @@ export type Config = {
     playerList:{
         enabled: boolean,
         dimensionIcons: Record<string, string>
+        enableFollowPlayer: boolean
     }
 }
 

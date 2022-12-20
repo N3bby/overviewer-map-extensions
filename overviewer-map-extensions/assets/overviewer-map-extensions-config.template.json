@@ -30,6 +30,7 @@
       "minecraft:overworld": "images/overworld.webp",
       "minecraft:the_nether": "images/the_nether.webp",
       "minecraft:the_end": "images/the_end.webp"
-    }
+    },
+    "enableFollowPlayer": true
   }
 }
