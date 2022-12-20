@@ -1,6 +1,7 @@
 plugins {
     id("fabric-loom")
     kotlin("jvm").version(System.getProperty("kotlin_version"))
+    kotlin("plugin.serialization") version "1.7.20"
 }
 base { archivesName.set(project.extra["archives_base_name"] as String) }
 version = project.extra["mod_version"] as String
