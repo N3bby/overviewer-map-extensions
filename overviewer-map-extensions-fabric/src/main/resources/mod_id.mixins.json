@@ -1,9 +1,11 @@
 {
   "required": true,
-  "package": "com.mod_author.mod_id.mixins",
+  "package": "com.razacx.overviewer_map_extensions.mixins",
   "compatibilityLevel": "JAVA_${java}",
   "injectors": {
     "defaultRequire": 1
   },
-  "mixins": []
+  "mixins": [
+    "PlayerManagerMixin"
+  ]
 }

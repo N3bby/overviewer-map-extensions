@@ -1,9 +1,9 @@
-package com.razacx.`overviewer-map-extensions`
+package com.razacx.overviewer_map_extensions
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.server.MinecraftServer
 
-class MinecraftServerProvider : ServerTickEvents.EndTick {
+object MinecraftServerProvider : ServerTickEvents.EndTick {
 
     private var _server: MinecraftServer? = null
 
