@@ -4,6 +4,13 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 const OUTPUT_PATH = process.env.OVERVIEWER_MAP_PATH || path.resolve(__dirname, 'dist');
 
+const files = [
+    'assets/overviewer-map-extensions-config.json',
+    'assets/favicon.ico',
+    'assets/moving-marker.js',
+    'assets/overviewer-map-extensions.css'
+]
+
 module.exports = {
     entry: './src/index.ts',
     devtool: 'inline-source-map',
@@ -30,18 +37,8 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-                {
-                    from: 'assets/overviewer-map-extensions-config.json',
-                    to: OUTPUT_PATH
-                },
-                {
-                    from: 'assets/favicon.ico',
-                    to: OUTPUT_PATH
-                },
-                {
-                    from: 'assets/moving-marker.js',
-                    to: OUTPUT_PATH
-                }
+                ...files.map((asset) => ({from: asset, to: OUTPUT_PATH})),
+                {from: 'assets/images' , to: path.join(OUTPUT_PATH, 'images')}
             ]
         })
     ],

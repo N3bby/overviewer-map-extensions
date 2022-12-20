@@ -18,6 +18,10 @@ export type ConfigJson = {
             map: string
             dimension: string
         }>
+    },
+    playerList:{
+        enabled: boolean,
+        dimensionIcons: Record<string, string>
     }
 }
 
@@ -35,6 +39,10 @@ export type Config = {
             map: string
             dimension: string
         }>
+    },
+    playerList:{
+        enabled: boolean,
+        dimensionIcons: Record<string, string>
     }
 }
 

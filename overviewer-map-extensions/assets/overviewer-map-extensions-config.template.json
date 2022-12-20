@@ -20,8 +20,16 @@
     "enabled": true,
     "dimensionMapping": [
       { "map": "world - overworld", "dimension": "minecraft:overworld"},
-      { "map": "world - nether", "dimension": "minecraft:nether"},
-      { "map": "world - end", "dimension": "minecraft:nether}"}
+      { "map": "world - nether", "dimension": "minecraft:the_nether"},
+      { "map": "world - end", "dimension": "minecraft:the_end"}
     ]
+  },
+  "playerList": {
+    "enabled": true,
+    "dimensionIcons": {
+      "minecraft:overworld": "images/overworld.webp",
+      "minecraft:the_nether": "images/the_nether.webp",
+      "minecraft:the_end": "images/the_end.webp"
+    }
   }
 }
