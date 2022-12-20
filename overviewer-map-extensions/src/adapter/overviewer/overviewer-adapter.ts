@@ -1,4 +1,5 @@
 import {DimensionIdentifier, OverlayIdentifier} from '../../identifiers';
+import {LatLng, Marker} from 'leaflet';
 
 export class OverviewerAdapter {
 
@@ -60,6 +61,32 @@ export class OverviewerAdapter {
             const selectElement = event.target as HTMLSelectElement;
             listener(new DimensionIdentifier(selectElement.value))
         })
+    }
+
+    calculateLatNg(mapIdentifier: DimensionIdentifier, position: { x: number, y: number, z: number }): LatLng {
+        const map = this.overviewer.collections.mapTypes[mapIdentifier.getDimensionIdentifier()]
+
+        const renderKey = Object.keys(map)[0]!
+        const render = map[renderKey]
+
+        const zoomLevels = render.tileSetConfig.zoomLevels;
+        return this.overviewer.util.fromWorldToLatLng(
+            position.x,
+            position.y,
+            position.z,
+            {
+                zoomLevels: zoomLevels,
+                north_direction: 0,
+            },
+        ) as LatLng;
+    }
+
+    addMarker(marker: Marker) {
+        marker.addTo(this.overviewer.map)
+    }
+
+    removeMarker(marker: Marker) {
+        this.overviewer.map.removeLayer(marker);
     }
 }
 

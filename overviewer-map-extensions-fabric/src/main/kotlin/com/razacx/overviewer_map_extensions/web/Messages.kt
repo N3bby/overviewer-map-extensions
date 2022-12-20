@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class PlayersMessage(val players: List<Player>, val type: String = "PLAYERS")
 
 @Serializable
-data class Player(val name: String, val position: Position, val dimension: String)
+data class Player(val id: String, val name: String, val position: Position, val dimension: String)
 
 @Serializable
 data class Position(val x: Double, val y: Double, val z: Double)

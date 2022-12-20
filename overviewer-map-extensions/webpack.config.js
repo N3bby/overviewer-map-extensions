@@ -33,6 +33,14 @@ module.exports = {
                 {
                     from: 'assets/overviewer-map-extensions-config.json',
                     to: OUTPUT_PATH
+                },
+                {
+                    from: 'assets/favicon.ico',
+                    to: OUTPUT_PATH
+                },
+                {
+                    from: 'assets/moving-marker.js',
+                    to: OUTPUT_PATH
                 }
             ]
         })

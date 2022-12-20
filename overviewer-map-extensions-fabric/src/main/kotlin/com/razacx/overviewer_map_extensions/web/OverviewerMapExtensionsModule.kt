@@ -49,6 +49,7 @@ private fun WebSocketServerSession.doPlayerUpdates(interval: Long, unit: TimeUni
     return players.throttleLast(interval, unit).subscribe {
         val playersMessage = PlayersMessage(it.map { player ->
             Player(
+                player.uuidAsString,
                 player.name.string,
                 Position(player.pos.x, player.pos.y, player.pos.z),
                 player.getWorld().registryKey.value.toString()

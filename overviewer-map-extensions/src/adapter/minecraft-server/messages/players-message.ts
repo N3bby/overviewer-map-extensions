@@ -6,12 +6,14 @@ export type PlayerMessage = {
 }
 
 export type Player = {
-    player: string,
+    id: string,
+    name: string,
     position: {
         x: number
         y: number
         z: number
-    }
+    },
+    dimension: string
 }
 
 export function isPlayerMessage(message: Message): message is PlayerMessage {

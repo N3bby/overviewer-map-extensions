@@ -1,5 +1,5 @@
 import {overviewer} from './adapter/overviewer/overviewer-adapter';
-import {Config, parseConfig} from './config';
+import {parseConfig} from './config';
 import {removeCompassFeature} from './features/remove-compass';
 import {enableOverlayOnMapLoadFeature} from './features/enable-overlay-on-map-load';
 import {simulateDayNightCycleFeature} from './features/simulate-day-night-cycle';

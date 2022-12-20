@@ -13,7 +13,7 @@ export function simulateDayNightCycleFeature(config: Config) {
     minecraftServerAdapter.time$.subscribe(({timeOfDay}) => {
         lastServerTimeOfDay = timeOfDay
         lastServerTimeOfDayTimestamp = new Date()
-        console.log(`Time updated: ${timeOfDay}`)
+        console.log(`Time has updated: ${timeOfDay}`)
     })
 
     const updateOverlays = () => {
@@ -39,7 +39,7 @@ function calculateTimeOfDay(lastServerTimeOfDay: number, lastServerTimeOfDayTime
     const msSinceLastServerUpdate = new Date().getTime() - lastServerTimeOfDayTimestamp.getTime();
     const ticksSinceLastServerUpdate = msSinceLastServerUpdate / MS_PER_TICK
 
-    const timeOfDay = lastServerTimeOfDay + ticksSinceLastServerUpdate % TICKS_PER_DAY
+    const timeOfDay = (lastServerTimeOfDay + ticksSinceLastServerUpdate) % TICKS_PER_DAY
     return timeOfDay;
 }
 
