@@ -12,4 +12,4 @@ data class Player(val name: String, val position: Position, val dimension: Strin
 data class Position(val x: Double, val y: Double, val z: Double)
 
 @Serializable
-data class TimeMessage(val time: Long, val type: String = "TIME")
+data class TimeMessage(val timeOfDay: Long, val type: String = "TIME")

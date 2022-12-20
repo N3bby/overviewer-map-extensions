@@ -7,7 +7,7 @@ class MinecraftServerAdapter {
     private socket: WebSocket | undefined
 
     private playersSubject = new BehaviorSubject<PlayerMessage>({type: 'PLAYERS', players: []});
-    private timeSubject = new BehaviorSubject<TimeMessage>({type: 'TIME', time: 0});
+    private timeSubject = new BehaviorSubject<TimeMessage>({type: 'TIME', timeOfDay: 0});
 
     get players$(): Observable<PlayerMessage> {
         return this.playersSubject

@@ -15,21 +15,20 @@ object Events: ServerTickEvents.EndTick {
     val players: Observable<List<ServerPlayerEntity>>
         get() = _players
 
-    private var previousTime = 0L
-    private val _time = BehaviorSubject.create<Long>()
-    val time: Observable<Long>
-        get() = _time
+    private var previousTimeOfDay = 0L
+    private val _timeOfDay = BehaviorSubject.create<Long>()
+    val timeOfDay: Observable<Long>
+        get() = _timeOfDay
 
     override fun onEndTick(server: MinecraftServer?) {
         if(server != null) {
             _players.onNext(server.playerManager.playerList)
 
-            val currentTime = server.overworld.timeOfDay
-            if(abs(currentTime - previousTime) > TICK_DELTA_TO_TRIGGER_TIME_EVENT) {
-                _time.onNext(currentTime)
-                println("Time was updated!!")
+            val currentTimeOfDay = server.overworld.timeOfDay
+            if(abs(currentTimeOfDay - previousTimeOfDay) > TICK_DELTA_TO_TRIGGER_TIME_EVENT) {
+                _timeOfDay.onNext(currentTimeOfDay)
             }
-            previousTime = currentTime
+            previousTimeOfDay = currentTimeOfDay
         }
     }
 

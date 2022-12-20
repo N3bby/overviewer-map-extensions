@@ -7,17 +7,17 @@ export function simulateDayNightCycleFeature(config: Config) {
     minecraftServerAdapter.init(config.websocketUrl)
 
     const dayNightCycleOverlays = config.overlays.filter(overlay => overlay.simulateDayNightCycle)
-    let lastServerTime = 0;
-    let lastServerTimeTimestamp = new Date();
+    let lastServerTimeOfDay = 0;
+    let lastServerTimeOfDayTimestamp = new Date();
 
-    minecraftServerAdapter.time$.subscribe(({time}) => {
-        lastServerTime = time
-        lastServerTimeTimestamp = new Date()
-        console.log(`Time updated: ${time}`)
+    minecraftServerAdapter.time$.subscribe(({timeOfDay}) => {
+        lastServerTimeOfDay = timeOfDay
+        lastServerTimeOfDayTimestamp = new Date()
+        console.log(`Time updated: ${timeOfDay}`)
     })
 
     const updateOverlays = () => {
-        const timeOfDay = calculateTimeOfDay(lastServerTime, lastServerTimeTimestamp);
+        const timeOfDay = calculateTimeOfDay(lastServerTimeOfDay, lastServerTimeOfDayTimestamp);
         const opacity = getOpacityForTime(timeOfDay)
 
         dayNightCycleOverlays.forEach(overlay => {

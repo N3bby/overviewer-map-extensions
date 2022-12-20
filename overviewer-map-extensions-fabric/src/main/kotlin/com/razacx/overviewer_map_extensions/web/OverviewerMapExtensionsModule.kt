@@ -1,8 +1,7 @@
 package com.razacx.overviewer_map_extensions.web
 
 import com.razacx.overviewer_map_extensions.Events.players
-import com.razacx.overviewer_map_extensions.Events.time
-import com.razacx.overviewer_map_extensions.ServerProvider
+import com.razacx.overviewer_map_extensions.Events.timeOfDay
 import io.ktor.serialization.kotlinx.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -40,8 +39,8 @@ fun Application.overviewerMapExtensionsModule() {
 }
 
 private fun WebSocketServerSession.doTimeUpdates(): Disposable {
-    return time.subscribe { time ->
-        val timeMessage = TimeMessage(time)
+    return timeOfDay.subscribe { timeOfDay ->
+        val timeMessage = TimeMessage(timeOfDay)
         sendSerializedSafe(timeMessage)
     }
 }

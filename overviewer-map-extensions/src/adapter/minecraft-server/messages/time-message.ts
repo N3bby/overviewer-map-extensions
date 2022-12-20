@@ -2,7 +2,7 @@ import {Message} from './message';
 
 export type TimeMessage = {
     type: 'TIME'
-    time: number
+    timeOfDay: number
 }
 
 export function isTimeMessage(message: Message): message is TimeMessage {
