@@ -2,6 +2,7 @@ plugins {
     id("fabric-loom")
     kotlin("jvm").version(System.getProperty("kotlin_version"))
     kotlin("plugin.serialization") version "1.7.20"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 base { archivesName.set(project.extra["archives_base_name"] as String) }
 version = project.extra["mod_version"] as String
@@ -15,19 +16,12 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api", "fabric-api", project.extra["fabric_version"] as String)
     modImplementation("net.fabricmc", "fabric-language-kotlin", project.extra["fabric_language_kotlin_version"] as String)
 
-    implementation("io.ktor:ktor-server-core:$ktor_version")
-    implementation("io.ktor:ktor-server-netty:$ktor_version")
-    implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    implementation("io.ktor:ktor-server-websockets:$ktor_version")
-    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
-
-    include("io.ktor:ktor-server-core:$ktor_version")
-    include("io.ktor:ktor-server-netty:$ktor_version")
-    include("io.ktor:ktor-server-content-negotiation:$ktor_version")
-    include("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    include("io.ktor:ktor-server-websockets:$ktor_version")
-    include("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    shadow("io.ktor:ktor-server-core:$ktor_version")
+    shadow("io.ktor:ktor-server-netty:$ktor_version")
+    shadow("io.ktor:ktor-server-content-negotiation:$ktor_version")
+    shadow("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    shadow("io.ktor:ktor-server-websockets:$ktor_version")
+    shadow("io.reactivex.rxjava3:rxkotlin:3.0.1")
 }
 tasks {
     val javaVersion = JavaVersion.toVersion((project.extra["java_version"] as String).toInt())
@@ -48,5 +42,10 @@ tasks {
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
         withSourcesJar()
+    }
+    shadowJar {
+        archiveBaseName.set("shadow")
+        archiveClassifier.set("")
+        archiveVersion.set("")
     }
 }
