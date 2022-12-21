@@ -2,6 +2,7 @@ package com.razacx.overviewer_map_extensions.web
 
 import com.razacx.overviewer_map_extensions.Events.players
 import com.razacx.overviewer_map_extensions.Events.timeOfDay
+import com.razacx.overviewer_map_extensions.ServerProvider.server
 import io.ktor.serialization.kotlinx.*
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
@@ -23,14 +24,15 @@ fun Application.overviewerMapExtensionsModule() {
         contentConverter = KotlinxWebsocketSerializationConverter(Json { encodeDefaults = true })
     }
     routing {
-        get("test") {
-            println("Responded")
-            call.respond("Hello world")
-        }
         webSocket("/ws") {
             println("Opened websocket session")
             val playerSubscription = doPlayerUpdates(100, TimeUnit.MILLISECONDS)
             val timeSubscription = doTimeUpdates()
+
+            if(server != null) {
+                // Initial time message
+                sendSerializedSafe(TimeMessage(server!!.overworld.timeOfDay))
+            }
 
             for (message in incoming) {
                 // Keep web socket alive
@@ -44,8 +46,9 @@ fun Application.overviewerMapExtensionsModule() {
 }
 
 private fun WebSocketServerSession.doTimeUpdates(): Disposable {
-    return timeOfDay.subscribe { timeOfDay ->
+    return timeOfDay.skip(1).subscribe { timeOfDay ->
         val timeMessage = TimeMessage(timeOfDay)
+        println("Received tod from observable $timeOfDay")
         sendSerializedSafe(timeMessage)
     }
 }
