@@ -26,25 +26,33 @@ export class PlayerList {
         newElement.classList.add('online-player-list');
 
         const title = document.createElement('h2');
-        title.innerText = 'Online players'
+        title.innerText = 'Players'
         newElement.appendChild(title)
 
         this.children.forEach(child => child.element.destroy());
         this.children.forEach(child => child.subscription.unsubscribe());
-        const playerEntries = this.players
-            .map(player => {
-                const playerEntry = new PlayerEntry(this.dimensionIcons, player, this.followedPlayer$)
-                const subscription = playerEntry.click$.subscribe(() => {
-                    if(this.followedPlayerSubject.value === player) {
-                        this.followedPlayerSubject.next(undefined)
-                    } else {
-                        this.followedPlayerSubject.next(player)
-                    }
-                });
-                return {element: playerEntry, subscription}
-            })
-            .map(entry => entry.element.render())
-            .forEach(htmlElement => newElement?.appendChild(htmlElement))
+
+        if (this.players.length === 0) {
+            const noPlayersMessage = document.createElement('div')
+            noPlayersMessage.classList.add('no-players-online')
+            noPlayersMessage.innerText = "No players are online"
+            newElement.appendChild(noPlayersMessage);
+        } else {
+            this.players
+                .map(player => {
+                    const playerEntry = new PlayerEntry(this.dimensionIcons, player, this.followedPlayer$)
+                    const subscription = playerEntry.click$.subscribe(() => {
+                        if (this.followedPlayerSubject.value === player) {
+                            this.followedPlayerSubject.next(undefined)
+                        } else {
+                            this.followedPlayerSubject.next(player)
+                        }
+                    });
+                    return {element: playerEntry, subscription}
+                })
+                .map(entry => entry.element.render())
+                .forEach(htmlElement => newElement.appendChild(htmlElement))
+        }
 
         this.elementRef?.remove()
         this.parent.appendChild(newElement)

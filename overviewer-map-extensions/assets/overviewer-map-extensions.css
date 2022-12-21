@@ -7,7 +7,6 @@
     top: 90px;
     left: 12px;
     min-width: 200px;
-    min-height: 200px;
     z-index: 1000;
     color: #e8e6e3
 }
@@ -16,6 +15,11 @@
     margin-top: 0;
     margin-bottom: 8px;
     font-size: 14px;
+}
+
+.overviewer-map-ext.online-player-list .no-players-online {
+    font-size: 13px;
+    font-style: italic;
 }
 
 .overviewer-map-ext.online-player-list .player-entry {
