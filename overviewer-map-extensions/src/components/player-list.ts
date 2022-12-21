@@ -1,5 +1,5 @@
 import {Player} from '../adapter/minecraft-server/messages/players-message';
-import {isEqual, omit} from 'lodash';
+import {isEqual} from 'lodash';
 import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 
 // TODO Replace with micro-frontend (Vue, React, ...?)
@@ -48,6 +48,11 @@ export class PlayerList {
                             this.followedPlayerSubject.next(player)
                         }
                     });
+                    // Temp fix for re-emitting followedPlayer when the dimension changes (so the map also changes)
+                    const followedPlayer = this.followedPlayerSubject.value;
+                    if(player.id === followedPlayer?.id && player.dimension !== followedPlayer?.dimension) {
+                        this.followedPlayerSubject.next(player)
+                    }
                     return {element: playerEntry, subscription}
                 })
                 .map(entry => entry.element.render())
@@ -66,7 +71,6 @@ export class PlayerList {
         );
         if (shouldRerender) {
             this.players = players;
-            console.log('render')
             this.render()
         }
     }
@@ -78,6 +82,7 @@ class PlayerEntry {
     private clickSubject = new Subject<void>();
     private elementRef: HTMLElement | undefined;
     private followedPlayerSubscription: Subscription;
+    private followed: boolean = false;
 
     get click$(): Observable<void> {
         return this.clickSubject
@@ -89,7 +94,8 @@ class PlayerEntry {
         followedPlayer$: Observable<Player | undefined>
     ) {
         this.followedPlayerSubscription = followedPlayer$.subscribe((followedPlayer) => {
-            if (this.player === followedPlayer) {
+            this.followed = this.player.id === followedPlayer?.id
+            if (this.followed) {
                 this.elementRef?.classList.add('followed')
             } else {
                 this.elementRef?.classList.remove('followed')
@@ -101,6 +107,10 @@ class PlayerEntry {
         this.elementRef = document.createElement('div')
         this.elementRef.classList.add('player-entry')
         this.elementRef.addEventListener('click', () => this.clickSubject.next())
+
+        if (this.followed) {
+            this.elementRef.classList.add('followed')
+        }
 
         const playerImage = document.createElement('img')
         playerImage.classList.add('player-icon')

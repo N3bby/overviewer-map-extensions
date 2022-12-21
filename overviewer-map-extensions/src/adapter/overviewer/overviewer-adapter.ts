@@ -1,5 +1,5 @@
 import {DimensionIdentifier, OverlayIdentifier} from '../../identifiers';
-import {LatLng, Marker, videoOverlay} from 'leaflet';
+import {LatLng, Marker} from 'leaflet';
 
 export class OverviewerAdapter {
 
@@ -63,6 +63,12 @@ export class OverviewerAdapter {
         })
     }
 
+    changeMap(playerMap: DimensionIdentifier) {
+        const select = this.overviewer.worldCtrl.select as HTMLSelectElement
+        select.value = playerMap.getDimensionIdentifier();
+        (select as any).onchange({target: select})
+    }
+
     calculateLatNg(mapIdentifier: DimensionIdentifier, position: { x: number, y: number, z: number }): LatLng {
         const map = this.overviewer.collections.mapTypes[mapIdentifier.getDimensionIdentifier()]
 
@@ -89,9 +95,17 @@ export class OverviewerAdapter {
         this.overviewer.map.removeLayer(marker);
     }
 
-    panTo(position: {x: number, y: number, z: number}) {
+    panTo(position: {x: number, y: number, z: number}, durationInMs: number) {
         const latNg = this.calculateLatNg(this.getCurrentDimension(), position)
-        this.overviewer.map.panTo(latNg)
+        this.overviewer.map.panTo(latNg, {animate: true, duration: durationInMs / 1000, easeLinearity: 1})
+    }
+
+    getZoom(): number {
+        return this.overviewer.map.getZoom();
+    }
+
+    setZoom(zoom: number) {
+        this.overviewer.map.setZoom(zoom);
     }
 }
 
