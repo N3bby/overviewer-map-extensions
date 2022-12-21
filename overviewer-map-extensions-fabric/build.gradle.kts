@@ -65,19 +65,10 @@ tasks {
         archiveClassifier.set("shadow")
         configurations = listOf(project.configurations.shadow.get())
 
-        relocate("io.ktor", "com.razacx.overviewer_map_extensions.shadow.io.ktor")
-        relocate("kotlinx", "com.razacx.overviewer_map_extensions.shadow.kotlinx")
-        relocate("io.reactivex", "com.razacx.overviewer_map_extensions.shadow.io.reactivex")
-
-        relocate("kotlin", "com.razacx.overviewer_map_extensions.shadow.kotlin")
-        relocate("io.netty", "com.razacx.overviewer_map_extensions.shadow.io.netty")
-
-        relocate("org.eclipse", "com.razacx.overviewer_map_extensions.shadow.org.eclipse")
-        relocate("org.fusesource", "com.razacx.overviewer_map_extensions.shadow.org.fusesource")
-        relocate("org.intellij", "com.razacx.overviewer_map_extensions.shadow.org.intellij")
-        relocate("org.jetbrains", "com.razacx.overviewer_map_extensions.shadow.org.jetbrains")
-        relocate("org.reactivestreams", "com.razacx.overviewer_map_extensions.shadow.org.reactivestreams")
-        relocate("org.slf4j", "com.razacx.overviewer_map_extensions.shadow.org.slf4j")
+         relocate("io.ktor", "com.razacx.overviewer_map_extensions.shadow.io.ktor")
+         relocate("kotlinx.serialization", "com.razacx.overviewer_map_extensions.shadow.kotlinx.serialization")
+         relocate("kotlinx.serialization", "com.razacx.overviewer_map_extensions.shadow.kotlinx.serialization")
+         relocate("io.reactivex", "com.razacx.overviewer_map_extensions.shadow.io.reactivex")
     }
 
     prepareRemapJar {
