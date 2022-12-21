@@ -1,5 +1,6 @@
 import {DimensionIdentifier, OverlayIdentifier} from '../../identifiers';
 import {LatLng, Marker} from 'leaflet';
+import {over} from 'lodash';
 
 export class OverviewerAdapter {
 
@@ -20,7 +21,7 @@ export class OverviewerAdapter {
         });
     }
 
-    enableOverlay(overlayIdentifier: OverlayIdentifier) {
+    setOverlay(overlayIdentifier: OverlayIdentifier, enabled: boolean) {
         const overlayCollection = this.overviewer.collections.overlays[overlayIdentifier.getDimensionIdentifier()][overlayIdentifier.getOverlayIdentifier()];
 
         const overlayName = overlayCollection.tileSetConfig.name;
@@ -35,9 +36,23 @@ export class OverviewerAdapter {
                 })
             });
 
-        if (layerControlInputForOverlay) {
-            layerControlInputForOverlay.click()
+        if(layerControlInputForOverlay) {
+            if(layerControlInputForOverlay.checked && !enabled) {
+                console.log('Enabling overlay')
+                layerControlInputForOverlay.click()
+            } else if(!layerControlInputForOverlay.checked && enabled) {
+                console.log('Disabling overlay')
+                layerControlInputForOverlay.click()
+            }
         }
+    }
+
+    enableOverlay(overlayIdentifier: OverlayIdentifier) {
+        this.setOverlay(overlayIdentifier, true)
+    }
+
+    disableOverlay(overlayIdentifier: OverlayIdentifier) {
+        this.setOverlay(overlayIdentifier, false)
     }
 
     setOverlayOpacity(overlayIdentifier: OverlayIdentifier, opacity: number) {

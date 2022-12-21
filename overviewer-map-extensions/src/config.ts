@@ -11,6 +11,9 @@ export type ConfigJson = {
         overlayRender: string,
         enableWhenWorldIsLoaded?: boolean
         simulateDayNightCycle?: boolean
+        followPlayerConfig?: {
+            disableWhenPlayerUnderYLevel: number
+        }
     }>,
     dynamicPlayers: {
         enabled: boolean,
@@ -32,7 +35,10 @@ export type Config = {
     overlays: Array<{
         identifier: OverlayIdentifier,
         enableWhenWorldIsLoaded?: boolean
-        simulateDayNightCycle?: boolean
+        simulateDayNightCycle?: boolean,
+        followPlayerConfig?: {
+            disableWhenPlayerUnderYLevel: number
+        }
     }>,
     dynamicPlayers: {
         enabled: boolean,
@@ -56,9 +62,8 @@ export async function parseConfig(): Promise<Config> {
     return asType<Config>({
         ...config,
         overlays: config.overlays.map((overlay) => ({
+            ...overlay,
             identifier: overlayIdentifier(overlay.world, overlay.render, overlay.overlayRender),
-            enableWhenWorldIsLoaded: overlay.enableWhenWorldIsLoaded,
-            simulateDayNightCycle: overlay.simulateDayNightCycle
         })),
     })
 }

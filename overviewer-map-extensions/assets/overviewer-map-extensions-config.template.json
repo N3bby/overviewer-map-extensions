@@ -13,7 +13,10 @@
       "world": "world",
       "render": "nether",
       "overlayRender": "nether-roof",
-      "enableWhenWorldIsLoaded":  true
+      "enableWhenWorldIsLoaded":  true,
+      "followPlayerConfig": {
+        "disableWhenPlayerUnderYLevel": 127
+      }
     }
   ],
   "dynamicPlayers": {
