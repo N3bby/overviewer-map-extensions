@@ -31,7 +31,7 @@ https://user-images.githubusercontent.com/1220787/208959257-ee32d9d2-019a-459e-a
 
 ## 2. Installation
 
-overviewer-map-extensions consists out of 2 modules:
+**overviewer-map-extensions** consists out of 2 modules:
 - Is a fabric mod that exposes information via a websocket
 - Is a typescript module that adds all the features on the client-side 
 
