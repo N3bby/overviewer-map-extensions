@@ -22,14 +22,15 @@ dependencies {
         project.extra["fabric_language_kotlin_version"] as String
     )
 
-    modImplementation(include("io.ktor:ktor-server-core:$ktor_version")!!)
-    modImplementation(include("io.ktor:ktor-server-netty:$ktor_version")!!)
-    modImplementation(include("io.ktor:ktor-server-content-negotiation:$ktor_version")!!)
-    modImplementation(include("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")!!)
-    modImplementation(include("io.ktor:ktor-server-websockets:$ktor_version")!!)
-    modImplementation(include("io.reactivex.rxjava3:rxkotlin:3.0.1")!!)
+    shadow(implementation("io.ktor:ktor-server-core:$ktor_version")!!)
+    shadow(implementation("io.ktor:ktor-server-netty:$ktor_version")!!)
+    shadow(implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")!!)
+    shadow(implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")!!)
+    shadow(implementation("io.ktor:ktor-server-websockets:$ktor_version")!!)
+    shadow(implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")!!)
 }
 tasks {
+
     val javaVersion = JavaVersion.toVersion((project.extra["java_version"] as String).toInt())
     withType<JavaCompile> {
         options.encoding = "UTF-8"
@@ -61,15 +62,15 @@ tasks {
         withSourcesJar()
     }
 
-//    shadowJar {
-//        archiveClassifier.set("shadow")
-//        configurations = listOf(project.configurations.shadow.get())
-//    }
-//
-//    prepareRemapJar {
-//        dependsOn(shadowJar)
-//    }
-//    remapJar {
-//        inputFile.set(shadowJar.get().archiveFile.get())
-//    }
+    shadowJar {
+        archiveClassifier.set("shadow")
+        configurations = listOf(project.configurations.shadow.get())
+    }
+
+    prepareRemapJar {
+        dependsOn(shadowJar)
+    }
+    remapJar {
+        inputFile.set(shadowJar.get().archiveFile.get())
+    }
 }
