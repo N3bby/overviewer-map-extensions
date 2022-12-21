@@ -2,8 +2,8 @@
 
 ## Table of contents
 
-**[1. Features]()**  
-**[2. Installation]()**
+**[1. Features](https://github.com/N3bby/overviewer-map-extensions#1-features)**  
+**[2. Installation](https://github.com/N3bby/overviewer-map-extensions#2-installation)**
 
 ## 1. Features
 ### Simulate day-night cycle
