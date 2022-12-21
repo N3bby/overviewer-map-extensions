@@ -24,6 +24,7 @@ fun Application.overviewerMapExtensionsModule() {
     }
     routing {
         get("test") {
+            println("Responded")
             call.respond("Hello world")
         }
         webSocket("/ws") {
