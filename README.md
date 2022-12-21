@@ -1,6 +1,11 @@
 # overviewer-map-extensions
 
-## Features
+## Table of contents
+
+**[1. Features]()**  
+**[2. Installation]()**
+
+## 1. Features
 ### Simulate day-night cycle
 Simulates a day night cycle on the map by dynamically changing the opacity of night-time overlay.
 
@@ -23,3 +28,5 @@ This will change the map if a player goes to another dimension.
 Click again to stop following the player.
 
 https://user-images.githubusercontent.com/1220787/208959257-ee32d9d2-019a-459e-aefc-95ab602ed5a9.mp4
+
+## 2. Installation
