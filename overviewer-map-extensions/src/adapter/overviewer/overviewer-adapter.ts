@@ -57,8 +57,8 @@ export class OverviewerAdapter {
     }
 
     onMapChange(listener: (dimensionIdentifier: DimensionIdentifier) => void) {
-        const orignalFn = this.overviewer.worldCtrl.onChange
-        this.overviewer.worldCtrl.onChange = (event: any) => {
+        const orignalFn = this.overviewer.worldCtrl.select.onchange
+        this.overviewer.worldCtrl.select.onchange = (event: any) => {
             orignalFn(event)
             const selectElement = event.target as HTMLSelectElement;
             listener(new DimensionIdentifier(selectElement.value))
