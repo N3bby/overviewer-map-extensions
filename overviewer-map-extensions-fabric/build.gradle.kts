@@ -14,14 +14,18 @@ dependencies {
     mappings("net.fabricmc", "yarn", project.extra["yarn_mappings"] as String, null, "v2")
     modImplementation("net.fabricmc", "fabric-loader", project.extra["loader_version"] as String)
     modImplementation("net.fabricmc.fabric-api", "fabric-api", project.extra["fabric_version"] as String)
-    modImplementation("net.fabricmc", "fabric-language-kotlin", project.extra["fabric_language_kotlin_version"] as String)
+    modImplementation(
+        "net.fabricmc",
+        "fabric-language-kotlin",
+        project.extra["fabric_language_kotlin_version"] as String
+    )
 
-    shadow("io.ktor:ktor-server-core:$ktor_version")
-    shadow("io.ktor:ktor-server-netty:$ktor_version")
-    shadow("io.ktor:ktor-server-content-negotiation:$ktor_version")
-    shadow("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    shadow("io.ktor:ktor-server-websockets:$ktor_version")
-    shadow("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    shadow(implementation("io.ktor:ktor-server-core:$ktor_version")!!)
+    shadow(implementation("io.ktor:ktor-server-netty:$ktor_version")!!)
+    shadow(implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")!!)
+    shadow(implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")!!)
+    shadow(implementation("io.ktor:ktor-server-websockets:$ktor_version")!!)
+    shadow(implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")!!)
 }
 tasks {
     val javaVersion = JavaVersion.toVersion((project.extra["java_version"] as String).toInt())
@@ -34,7 +38,18 @@ tasks {
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions { jvmTarget = javaVersion.toString() } }
     jar { from("LICENSE") { rename { "${it}_${base.archivesName.get()}" } } }
     processResources {
-        filesMatching("fabric.mod.json") { expand(mutableMapOf("version" to project.extra["mod_version"] as String, "fabricloader" to project.extra["loader_version"] as String, "fabric_api" to project.extra["fabric_version"] as String, "fabric_language_kotlin" to project.extra["fabric_language_kotlin_version"] as String, "minecraft" to project.extra["minecraft_version"] as String, "java" to project.extra["java_version"] as String)) }
+        filesMatching("fabric.mod.json") {
+            expand(
+                mutableMapOf(
+                    "version" to project.extra["mod_version"] as String,
+                    "fabricloader" to project.extra["loader_version"] as String,
+                    "fabric_api" to project.extra["fabric_version"] as String,
+                    "fabric_language_kotlin" to project.extra["fabric_language_kotlin_version"] as String,
+                    "minecraft" to project.extra["minecraft_version"] as String,
+                    "java" to project.extra["java_version"] as String
+                )
+            )
+        }
         filesMatching("*.mixins.json") { expand(mutableMapOf("java" to project.extra["java_version"] as String)) }
     }
     java {
@@ -43,9 +58,25 @@ tasks {
         targetCompatibility = javaVersion
         withSourcesJar()
     }
+
     shadowJar {
-        archiveBaseName.set("shadow")
-        archiveClassifier.set("")
-        archiveVersion.set("")
+        archiveClassifier.set("shadow")
+
+        // TODO Fix shadowJar relocate issue
+        // Relocate causes error "unsupported class file major version 63" (java 19)
+        // No idea why since we are using java 17
+        // Perhaps all these libraries were compiled with java 19 or something?
+
+        // relocate("io.ktor", "com.razacx.overviewer_map_extensions.shadow.io.ktor")
+        // relocate("kotlinx.serialization", "com.razacx.overviewer_map_extensions.shadow.kotlinx.serialization")
+        // relocate("kotlinx.serialization", "com.razacx.overviewer_map_extensions.shadow.kotlinx.serialization")
+        // relocate("io.reactivex", "com.razacx.overviewer_map_extensions.shadow.io.reactivex")
+    }
+
+    prepareRemapJar {
+        dependsOn(shadowJar)
+    }
+    remapJar {
+        inputFile.set(shadowJar.get().archiveFile.get())
     }
 }
