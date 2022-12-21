@@ -4,8 +4,8 @@ import com.razacx.overviewer_map_extensions.Events.players
 import com.razacx.overviewer_map_extensions.Events.timeOfDay
 import io.ktor.serialization.kotlinx.*
 import io.ktor.server.application.*
+import io.ktor.server.cio.*
 import io.ktor.server.engine.*
-import io.ktor.server.netty.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.Json
 import java.util.concurrent.TimeUnit
 
 fun startWebServer() {
-    embeddedServer(Netty, port = 8080, module = Application::overviewerMapExtensionsModule).start(wait = false)
+    embeddedServer(CIO, port = 8080, module = Application::overviewerMapExtensionsModule).start(wait = false)
 }
 
 fun Application.overviewerMapExtensionsModule() {
