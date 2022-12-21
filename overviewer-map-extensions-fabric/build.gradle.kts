@@ -64,11 +64,6 @@ tasks {
     shadowJar {
         archiveClassifier.set("shadow")
         configurations = listOf(project.configurations.shadow.get())
-
-         relocate("io.ktor", "com.razacx.overviewer_map_extensions.shadow.io.ktor")
-         relocate("kotlinx.serialization", "com.razacx.overviewer_map_extensions.shadow.kotlinx.serialization")
-         relocate("kotlinx.serialization", "com.razacx.overviewer_map_extensions.shadow.kotlinx.serialization")
-         relocate("io.reactivex", "com.razacx.overviewer_map_extensions.shadow.io.reactivex")
     }
 
     prepareRemapJar {
