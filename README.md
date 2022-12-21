@@ -30,3 +30,41 @@ Click again to stop following the player.
 https://user-images.githubusercontent.com/1220787/208959257-ee32d9d2-019a-459e-aefc-95ab602ed5a9.mp4
 
 ## 2. Installation
+
+overviewer-map-extensions consists out of 2 modules:
+- Is a fabric mod that exposes information via a websocket
+- Is a typescript module that adds all the features on the client-side 
+
+### a. Fabric mod
+
+#### Requirements
+
+- Java 17
+
+#### Building
+1. Go to the [overviewer-map-extensions-fabric](./overviewer-map-extensions-fabric) directory
+2. Build the mod by running `./gradlew clean build`
+
+#### Installing
+1. Install [Fabric Language Kotlin](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin)
+2. Copy `overviewer-map-extensions-fabric-1.0.0.jar` from the `./overviewer-map-extensions-fabric/build/libs/` directory to your fabric mod folder
+
+When running your minecraft server, a web server will start listening for incoming connections.  
+You should be able to connect to the websocket on `ws://<host>:8080/ws`
+
+### b. Typescript module
+
+#### Requirements
+
+- Node.js 8.12.1
+
+#### Building
+1. Go to the [overviewer-map-extensions](./overviewer-map-extensions) directory
+2. Run `npm install` to download all the dependencies
+3. Duplicate the config template file in `./overviewer-map-extensions/assets/overviewer-map-extensions-config.template.json` and name it `overviewer-map-extensions-config.json`
+4. Run `npm run build`
+
+#### Installing
+1. Copy the contents of the `./overviewer-map-extensions/dist/` directory to the root of your overviewer map directory (where the index.html is located)
+2. Create a `overviewer-map-extensions-config.json` in the overviewer map directory. An example configuration file can be found [here](./overviewer-map-extensions/assets/overviewer-map-extensions-config.template.json)
+If you load your map in a browser now, it will connect to the websocket that the fabric mod provides and add all the enabled features
