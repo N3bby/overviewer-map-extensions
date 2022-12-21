@@ -57,10 +57,12 @@ export class OverviewerAdapter {
     }
 
     onMapChange(listener: (dimensionIdentifier: DimensionIdentifier) => void) {
-        (this.overviewer.worldCtrl.select as HTMLInputElement).addEventListener('input', (event: Event) => {
+        const orignalFn = this.overviewer.worldCtrl.onChange
+        this.overviewer.worldCtrl.onChange = (event: any) => {
+            orignalFn(event)
             const selectElement = event.target as HTMLSelectElement;
             listener(new DimensionIdentifier(selectElement.value))
-        })
+        }
     }
 
     changeMap(playerMap: DimensionIdentifier) {
