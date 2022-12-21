@@ -65,11 +65,6 @@ tasks {
         archiveClassifier.set("shadow")
         configurations = listOf(project.configurations.shadow.get())
 
-        // TODO Fix shadowJar relocate issue
-        // Relocate causes error "unsupported class file major version 63" (java 19)
-        // No idea why since we are using java 17
-        // Perhaps all these libraries were compiled with java 19 or something?
-
          relocate("io.ktor", "com.razacx.overviewer_map_extensions.shadow.io.ktor")
          relocate("kotlinx.serialization", "com.razacx.overviewer_map_extensions.shadow.kotlinx.serialization")
          relocate("kotlinx.serialization", "com.razacx.overviewer_map_extensions.shadow.kotlinx.serialization")
