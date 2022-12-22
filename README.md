@@ -7,7 +7,8 @@
 
 ## 1. Features
 ### Simulate day-night cycle
-Simulates a day night cycle on the map by dynamically changing the opacity of night-time overlay.
+Simulates a day night cycle on the map by dynamically changing the opacity of night-time overlay.  
+The time of day is synced with the server
 
 https://user-images.githubusercontent.com/1220787/208959510-571d8dc8-a79b-41f8-a999-642e4d7a7c7b.mp4
 
