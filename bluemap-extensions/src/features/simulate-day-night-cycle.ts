@@ -34,7 +34,9 @@ export function simulateDayNightCycleFeature(config: Config) {
 
 function getMapsToSimulateDayNightCycleOn(config: Config): string[] {
   if (!config.maps) return [];
-  return Object.keys(config.maps).filter(map => config.maps![map]?.simulateDayNightCycle)
+  return Object.values(config.maps)
+      .filter(map => map.simulateDayNightCycle)
+      .map(map => map.blueMapKey)
 }
 
 function calculateTimeOfDay(lastServerTimeOfDay: number, lastServerTimeOfDayTimestamp: Date) {
