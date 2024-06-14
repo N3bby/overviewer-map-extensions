@@ -1,36 +1,48 @@
 {
-  "schemaVersion": 1,
-  "id": "overviewer-map-extensions",
-  "version": "${version}",
-  "name": "overviewer-map-extensions",
-  "description": "Adds websocket API that supports overviewer-map-extensions",
-  "authors": [
-    "N3bby"
-  ],
-  "contact": {
-    "homepage": "https://github.com/N3bby/overviewer-map-extensions",
-    "issues": "https://github.com/N3bby/overviewer-map-extensions/issues",
-    "sources": "https://github.com/N3bby/overviewer-map-extensions"
-  },
-  "license": "The Unlicense",
-  "icon": "assets/mod_name/icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      {
-        "adapter": "kotlin",
-        "value": "com.razacx.overviewer_map_extensions.OverviewerMapExtensions"
-      }
-    ]
-  },
-  "mixins": [
-    "mod_id.mixins.json"
-  ],
-  "depends": {
-    "fabricloader": ">=${fabricloader}",
-    "fabric-api": ">=${fabric_api}",
-    "fabric-language-kotlin": ">=${fabric_language_kotlin}",
-    "minecraft": ">=${minecraft}",
-    "java": ">=${java}"
-  }
+	"schemaVersion": 1,
+	"id": "overviewer-map-extensions-fabric",
+	"version": "${version}",
+	"name": "overviewer-map-extensions-fabric",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/overviewer-map-extensions-fabric/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "by.n3b.overviewer_map_extensions.Overviewermapextensionsfabric",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "by.n3b.overviewer_map_extensions.OverviewermapextensionsfabricClient",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"overviewer-map-extensions-fabric.mixins.json",
+		{
+			"config": "overviewer-map-extensions-fabric.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
 }
