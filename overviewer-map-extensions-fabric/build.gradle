@@ -1,7 +1,8 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
-    id 'maven-publish'
+    id "fabric-loom" version "1.6-SNAPSHOT"
+    id "maven-publish"
     id "org.jetbrains.kotlin.jvm" version "2.0.0"
+    id "org.jetbrains.kotlin.plugin.serialization" version "2.0.0"
 }
 
 version = project.mod_version
@@ -10,6 +11,15 @@ group = project.maven_group
 base {
     archivesName = project.archives_base_name
 }
+
+configurations {
+    transitiveInclude {
+        exclude group: 'com.mojang'
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.jetbrains.kotlinx'
+    }
+}
+
 
 dependencies {
     // To change the versions see the gradle.properties file
@@ -20,6 +30,20 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+
+    // RxJava
+    transitiveInclude(implementation("io.reactivex.rxjava3:rxjava:3.1.8"))
+
+    // Ktor
+    transitiveInclude(implementation("io.ktor:ktor-server-core:${project.ktor}"))
+    transitiveInclude(implementation("io.ktor:ktor-server-cio:${project.ktor}"))
+    transitiveInclude(implementation("io.ktor:ktor-server-content-negotiation:${project.ktor}"))
+    transitiveInclude(implementation("io.ktor:ktor-serialization-kotlinx-json:${project.ktor}"))
+    transitiveInclude(implementation("io.ktor:ktor-server-websockets:${project.ktor}"))
+
+    configurations.transitiveInclude.resolvedConfiguration.resolvedArtifacts.each { artifact ->
+        include artifact.moduleVersion.id.toString()
+    }
 }
 
 processResources {

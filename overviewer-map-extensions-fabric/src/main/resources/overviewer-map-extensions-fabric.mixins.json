@@ -2,9 +2,7 @@
 	"required": true,
 	"package": "by.n3b.overviewer_map_extensions.mixin",
 	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"ExampleMixin"
-	],
+	"mixins": [],
 	"injectors": {
 		"defaultRequire": 1
 	}

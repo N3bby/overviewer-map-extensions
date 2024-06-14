@@ -17,23 +17,13 @@
 	"entrypoints": {
 		"main": [
 			{
-				"value": "by.n3b.overviewer_map_extensions.Overviewermapextensionsfabric",
-				"adapter": "kotlin"
-			}
-		],
-		"client": [
-			{
-				"value": "by.n3b.overviewer_map_extensions.OverviewermapextensionsfabricClient",
+				"value": "by.n3b.overviewer_map_extensions.OverviewerMapExtensions",
 				"adapter": "kotlin"
 			}
 		]
 	},
 	"mixins": [
-		"overviewer-map-extensions-fabric.mixins.json",
-		{
-			"config": "overviewer-map-extensions-fabric.client.mixins.json",
-			"environment": "client"
-		}
+		"overviewer-map-extensions-fabric.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.11",
