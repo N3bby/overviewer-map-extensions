@@ -1,7 +1,7 @@
 {
-  "name": "overviewer-map-extensions",
+  "name": "bluemap-extensions",
   "author": "N3bby",
-  "description": "Library of UI extensions for a Minecraft Overviewer map",
+  "description": "Library of UI extensions for the Bluemap mod",
   "version": "1.0.0",
   "private": true,
   "scripts": {

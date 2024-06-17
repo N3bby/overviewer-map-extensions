@@ -1,6 +1,6 @@
 const path = require('path');
 
-const OUTPUT_PATH = process.env.OVERVIEWER_MAP_PATH || path.resolve(__dirname, 'dist');
+const OUTPUT_PATH = path.resolve(__dirname, 'dist');
 
 module.exports = {
   entry: './src/index.ts',

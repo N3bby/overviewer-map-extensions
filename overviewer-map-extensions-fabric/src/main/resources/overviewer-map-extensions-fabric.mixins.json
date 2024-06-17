@@ -1,9 +1,0 @@
-{
-	"required": true,
-	"package": "by.n3b.overviewer_map_extensions.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [],
-	"injectors": {
-		"defaultRequire": 1
-	}
-}
